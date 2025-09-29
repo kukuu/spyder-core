@@ -1,0 +1,30 @@
+
+# README
+
+```
+digital-twin-backend/
+├── src/
+│   ├── lib/
+│   │   └── supabaseClient.ts       # Supabase client initialization
+│   ├── services/
+│   │   ├── llmService.ts           # Core LLM logic (handleLLMQuery)
+│   │   └── types.ts                # Type definitions (QueryRequest, etc.)
+│   ├── routes/
+│   │   ├── llm.ts                  # LLM API endpoint router
+│   │   └── index.ts                # Main router aggregator
+│   ├── utils/
+│   │   ├── env.ts                  # Zod env validation
+│   │   └── errorHandler.ts         # Custom error middleware
+│   └── index.ts                    # Express app entry point
+├── tests/                          # (Optional)
+│   ├── llmService.test.ts
+│   └── routes.test.ts
+├── .env.local                      # Local env vars (gitignored)
+├── .gitignore
+├── package.json
+├── tsconfig.json                   # TypeScript config
+├── render.yaml                     # Render deployment config
+└── README.md
+
+
+```
