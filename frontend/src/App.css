@@ -1,0 +1,1464 @@
+/* ============ BASE STYLES ============ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
+
+/* ============ NAVBAR STYLES ============ */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 100;
+  width: 100%;
+}
+
+.navbar-brand h2 {
+  margin: 0;
+  color: #333;
+  font-size: 3rem;
+}
+
+.navbar-brand a {
+  text-decoration: none;
+  color: green;
+}
+
+.navbar-auth {
+  display: flex;
+  align-items: center;
+}
+
+/* ============ MAIN CONTENT LAYOUT ============ */
+.main-content-container {
+  display: flex;
+  width: 100%;
+}
+
+.sideBar {
+  width: 150px;
+  background-color: #f5f5f5;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-height: calc(100vh - 80px);
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ad-card {
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.ad-card:hover {
+  transform: translateY(-2px);
+}
+
+.ad-card h4 {
+  margin-bottom: 8px;
+  color: #2e7d32;
+}
+
+.ad-card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.ad-placeholder {
+  height: 100px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+/* ============ MAIN CONTAINER ============ */
+.container {
+  padding-top: 2rem;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* ============ CARD STYLES ============ */
+.card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ============ MODAL STYLES ============ */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* ============ NEWSLETTER MODAL STYLES ============ */
+.newsletter-modal .modal-content {
+  max-width: 500px;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.newsletter-modal .modal-header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.newsletter-modal .modal-header h2 {
+  font-size: 1.8rem;
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.newsletter-modal .modal-body {
+  padding: 0;
+}
+
+/* Payment method selector styles */
+.payment-method-selector {
+  margin-bottom: 2rem;
+}
+
+.payment-method-tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1.5rem;
+}
+
+.payment-method-tab {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  font-weight: 500;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.payment-method-tab.active {
+  color: #2e7d32;
+  border-bottom-color: #2e7d32;
+}
+
+.payment-method-content {
+  display: none;
+}
+
+.payment-method-content.active {
+  display: block;
+}
+
+/* PayPal specific payment method styles */
+.payment-method-content.paypal-method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.payment-method-content.paypal-method.active {
+  display: flex !important;
+}
+
+/* Form group styles */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.875rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  background-color: white;
+}
+
+/* Card details styles */
+.card-details {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #eee;
+}
+
+.card-details .form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-details .form-row .form-group {
+  flex: 1;
+}
+
+/* PayPal button container styles */
+.paypal-button-container {
+  width: 100%;
+  min-height: 45px;
+  margin: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.paypal-button-container > div {
+  width: 100%;
+  max-width: 400px;
+}
+
+.paypal-button-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Ensure the PayPal button takes full width */
+.paypal-button-container .paypal-buttons {
+  width: 100% !important;
+  min-width: 200px;
+}
+
+/* ============ PAYPAL COMPONENT STYLES ============ */
+.paypal-component {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.paypal-header {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.paypal-subheader {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.paypal-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  color: #999;
+  width: 100%;
+}
+
+.paypal-divider::before,
+.paypal-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ddd;
+}
+
+.paypal-divider-text {
+  padding: 0 1rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.paypal-button-wrapper {
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.paypal-logo {
+  font-weight: bold;
+  color: #003087;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.paypal-button {
+  background: #FFC439;
+  color: #111;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+  transition: background-color 0.3s;
+  display: block;
+  margin: 0 auto;
+}
+
+.paypal-button:hover {
+  background: #f2bb35;
+}
+
+/* Payment summary styles */
+.payment-summary {
+  background: #f5f9f5;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  border: 1px solid #e0e0e0;
+}
+
+.payment-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.payment-summary-row.total {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 0.75rem;
+}
+
+/* Submit button styles */
+.submit-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.payment-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  max-width: 300px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.payment-button:hover {
+  background-color: #3e8e41;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+}
+
+.payment-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Error message styles */
+.error-message {
+  color: white;
+  margin: 1rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.75rem;
+  background-color: #dc3545;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+}
+
+/* Terms and conditions styles */
+.terms-conditions {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
+  margin-top: 1.5rem;
+  line-height: 1.5;
+}
+
+.terms-conditions a {
+  color: #2e7d32;
+  text-decoration: none;
+}
+
+.terms-conditions a:hover {
+  text-decoration: underline;
+}
+
+/* ============ SWITCH SUPPLIER BUTTON ============ */
+.switch-supplier-button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.switch-supplier-button:hover {
+  background-color: #FFCC33;
+  color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Style for Switch to {supplier} button text */
+.switch-supplier-button a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.switch-supplier-button:hover a {
+  color: #333;
+}
+
+.modal-body small {
+  display: block;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #666;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* ============ FORM STYLES ============ */
+.detail-row {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.detail-row:last-child {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0;
+}
+
+.detail-row h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.send-reading-button,
+.paypal-payment-button {
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  flex: 1;
+  margin-top: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.send-reading-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.send-reading-button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.send-reading-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.paypal-payment-button {
+  background-color: #cccccc;
+  color: black;
+  cursor: none;
+}
+
+.paypal-payment-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Toast notification styles */
+.Toastify__toast-container {
+  z-index: 10000;
+}
+
+.Toastify__toast {
+  color: white !important;
+  font-size: 0.9rem;
+}
+
+.Toastify__toast--success {
+  background-color: #28a745 !important;
+}
+
+.Toastify__toast--error {
+  background-color: #dc3545 !important;
+}
+
+.Toastify__toast--info {
+  background-color: #17a2b8 !important;
+}
+
+.Toastify__toast--warning {
+  background-color: #ffc107 !important;
+  color: #212529 !important;
+}
+
+/* ============ INPUT STYLES ============ */
+.reading-input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.reading-input {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.reading-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+.reading-unit {
+  font-size: 1rem;
+  color: #666;
+}
+
+.updateReader {
+  color: palevioletred;
+}
+
+/* ============ READING FORM STYLES ============ */
+.reading-form-container {
+  margin: 2rem auto;
+  max-width: 600px;
+  text-align: center;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.reading-form-container form {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.calculate-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+}
+
+/* ============ RESULTS STYLES ============ */
+.results-container {
+  margin: 2rem auto;
+  max-width: 600px;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.cost-table th, 
+.cost-table td {
+  padding: 0.75rem;
+  text-align: center;
+  border: 1px solid #ddd;
+  word-wrap: break-word;
+}
+
+.cost-table th {
+  background-color: #f8f9fa;
+}
+
+.close-results-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 200px;
+}
+
+/* Style for SWITCH! text in results table */
+.switch-tariff-supplier a strong {
+  color: green;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.switch-tariff-supplier a:hover strong {
+  color: green;
+  text-decoration: none;
+}
+
+/* ============ TABLE LINK HOVER EFFECTS ============ */
+.result-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.result-row:hover {
+  background-color: #f5f5f5;
+}
+
+.switch-tariff-supplier {
+  position: relative;
+  padding-right: 20px;
+}
+
+.result-row:hover .switch-tariff-supplier::after {
+  content: "🔗";
+  position: absolute;
+  right: 0;
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.switch-tariff-supplier::after {
+  content: "🔗";
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* ============ UTILITY STYLES ============ */
+a.subscribe-newsletter {
+  color: green;
+  text-decoration: none;
+}
+
+.changeReading {
+  font-size: small;
+}
+
+/* ============ LAYOUT FIXES ============ */
+.advertising-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.advertising-columns {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ============ BRAND STORY STYLES ============ */
+.brand-story-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 20px 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.brand-story-column {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.brand-story-column .media-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.brand-story-column .media-container iframe,
+.brand-story-column .media-container video {
+  width: 100%;
+  height: 300px;
+  border: none;
+}
+
+.brand-story-column .media-container span {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+  padding: 0 15px;
+}
+
+/* Immersive Brand Ad Styles */
+.immersive-brand-ad {
+  width: 100%;
+  background: #f8f8f8;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.brand-hero-video {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.brand-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.video-overlay h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.video-overlay p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.brand-narrative {
+  padding: 2rem 1rem;
+  background: white;
+}
+
+.narrative-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.narrative-text {
+  width: 100%;
+}
+
+.narrative-text h3 {
+  font-size: 1.5rem;
+  color: #2e7d32;
+  margin-bottom: 1rem;
+}
+
+.narrative-text p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.narrative-image {
+  width: 100%;
+}
+
+.brand-story-image {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.image-caption {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.brand-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.product-showcase {
+  padding: 2rem 1rem;
+  background: #f5f9f5;
+  text-align: center;
+}
+
+.product-showcase h3 {
+  font-size: 1.5rem;
+  color: #2e7d32;
+  margin-bottom: 1.5rem;
+}
+
+.product-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.feature {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.feature-video-container {
+  height: 200px;
+  overflow: hidden;
+}
+
+.feature-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feature h4 {
+  padding: 1rem 1rem 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.feature p {
+  padding: 0 1rem 1rem;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.brand-cta {
+  padding: 2rem 1rem;
+  text-align: center;
+  background: white;
+}
+
+.brand-cta h3 {
+  font-size: 1.5rem;
+  color: #2e7d32;
+  margin-bottom: 1rem;
+}
+
+.brand-cta p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cta-primary {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cta-primary:hover {
+  background: #1b5e20;
+}
+
+.cta-secondary {
+  background: white;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cta-secondary:hover {
+  background: #f5f9f5;
+}
+
+.trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.trust-badges img {
+  height: 40px;
+  width: auto;
+}
+
+/* ============ RACE TO ZERO STYLES ============ */
+.race-to-zero {
+  text-align: center;
+  padding: 10px;
+}
+
+.race-to-zero a {
+  color: green;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  position: relative;
+  padding-right: 25px;
+  transition: color 0.3s;
+}
+
+.race-to-zero a:hover {
+  color: limegreen;
+}
+
+.race-to-zero a::after {
+  content: "🔗";
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.race-to-zero a:hover::after {
+  opacity: 1;
+}
+
+/* ============ TARGET LINK STYLES ============ */
+.target-link a {
+  display: inline-block;
+  background-color: #2e7d32;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  transition: all 0.3s;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: none;
+  text-align: center;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.target-link a:hover {
+  background-color: #FFCC33;
+  color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* ============ ENERGY SUPPLIER BADGES ============ */
+.energy-supplier {
+  font-weight: bold;
+  color: #2e7d32;
+  position: relative;
+  padding-right: 20px;
+}
+
+.energy-supplier::after {
+  content: "⚡";
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover .energy-supplier::after {
+  opacity: 1;
+}
+
+/* ============ RESPONSIVE ADJUSTMENTS ============ */
+@media (min-width: 768px) {
+  .brand-story-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  .brand-hero-video {
+    height: 518px;
+  }
+
+  .video-overlay {
+    padding: 2rem;
+  }
+
+  .video-overlay h2 {
+    font-size: 2.5rem;
+  }
+
+  .video-overlay p {
+    font-size: 1.2rem;
+  }
+
+  .brand-narrative {
+    padding: 3rem;
+  }
+
+  .narrative-content {
+    flex-direction: row;
+    max-width: 1200px;
+    gap: 3rem;
+  }
+
+  .narrative-text h3 {
+    font-size: 1.8rem;
+  }
+
+  .product-showcase {
+    padding: 3rem;
+  }
+
+  .product-features {
+    flex-direction: row;
+    max-width: 1200px;
+    gap: 2rem;
+  }
+
+  .brand-cta {
+    padding: 3rem;
+  }
+
+  .cta-buttons {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content-container {
+    flex-direction: column;
+  }
+  
+  .sideBar {
+    width: 100%;
+    min-height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .ad-card {
+    width: 150px;
+  }
+  
+  .navbar {
+    padding: 1rem;
+  }
+  
+  .navbar-brand h2 {
+    font-size: 1.5rem;
+  }
+  
+  .reading-form-container form {
+    flex-direction: column;
+  }
+  
+  .reading-input {
+    max-width: 100%;
+  }
+  
+  .detail-row:last-child {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .send-reading-button,
+  .paypal-payment-button {
+    width: 100%;
+  }
+
+  .cost-table {
+    font-size: 0.8rem;
+  }
+
+  .cost-table th, 
+  .cost-table td {
+    padding: 0.5rem;
+  }
+
+  /* Responsive adjustments for PayPal button */
+  .paypal-button-container {
+    padding: 0.5rem;
+  }
+  
+  .paypal-button-container > div {
+    width: 100%;
+  }
+}
+
+.main-content {
+  margin: 10px;
+}
+
+.tariff-section {
+  color: #dc3545;
+}
+
+/*Styles for LLM*/
+/* ============ NATURAL LANGUAGE QUERY STYLES ============ */
+.nl-query-section {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  border: 1px solid #e9ecef;
+}
+
+.nl-query-section h3 {
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.nl-query-section p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.nl-query-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nl-query-textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.3s;
+}
+
+.nl-query-textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.nl-query-button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  align-self: flex-start;
+}
+
+.nl-query-button:hover:not(:disabled) {
+  background-color: #1b5e20;
+  transform: translateY(-2px);
+}
+
+.nl-query-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* ============ QUERY RESULTS MODAL STYLES ============ */
+.query-results-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.query-results-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.query-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.query-results-header h3 {
+  color: #2e7d32;
+  margin: 0;
+}
+
+.query-results-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.query-result-item {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 4px solid #2e7d32;
+}
+
+.query-result-item h4 {
+  color: #2e7d32;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.query-result-item p {
+  margin: 0.25rem 0;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.query-result-item p:first-of-type {
+  font-weight: 500;
+}
+
+/* ============ RESPONSIVE ADJUSTMENTS ============ */
+@media (max-width: 768px) {
+  .nl-query-section {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .nl-query-section h3 {
+    font-size: 1.3rem;
+  }
+  
+  .query-results-content {
+    padding: 1.5rem;
+    width: 95%;
+  }
+  
+  .query-result-item {
+    padding: 0.75rem;
+  }
+}
+/* ============ OPTIMIZED NEWSLETTER LINK PING ANIMATION ============ */
+.crumbtrail {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  padding: 0.5rem 3rem 0.5rem 1rem; /* Increased right padding */
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.crumbtrail:hover {
+  background-color: #f0f0f0;
+  color: #2e7d32;
+}
+
+/* Optimized ping animation using single pseudo-element */
+.crumbtrail::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px; /* Adjusted position */
+  transform: translateY(-50%);
+  width: 12px; /* Increased size */
+  height: 12px; /* Increased size */
+  border-radius: 50%;
+  background-color: #af4c66;
+  animation: ping 2s ease-in-out infinite both; /* Slower for bigger effect */
+  z-index: 1;
+}
+
+.crumbtrail::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px; /* Adjusted position */
+  transform: translateY(-50%);
+  width: 8px; /* Increased size */
+  height: 8px; /* Increased size */
+  border-radius: 50%;
+  background-color: #af4ca3;
+  z-index: 2;
+}
+
+/* Enhanced ping animation - wider and bigger */
+@keyframes ping {
+  0% {
+    transform: translateY(-50%) scale(0.3);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-50%) scale(4); /* Much bigger scale */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-50%) scale(4);
+    opacity: 0;
+  }
+}

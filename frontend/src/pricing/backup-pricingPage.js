@@ -1,0 +1,899 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import { Link } from 'react-router-dom';
+import "./Pricing.css";
+import "../App.css";
+import { ToastContainer, toast } from "react-toastify";
+
+export default function PricingPage() {
+  // State management
+  const [selectedImageAd, setSelectedImageAd] = useState("");
+  const [selectedVideoAd, setSelectedVideoAd] = useState("");
+  const [paymentError, setPaymentError] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [activeAdExample, setActiveAdExample] = useState(null);
+  const [paypalLoaded, setPaypalLoaded] = useState(false);
+  const [paypalError, setPaypalError] = useState(false);
+
+  // Form handling
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    reset
+  } = useForm();
+
+  // Constants for ad options
+  const imageAdOptions = [
+    { id: "image-6months", duration: "6 months", price: 160, discount: "" },
+    { id: "image-12months", duration: "12 months", price: 330, discount: "20% off" }
+  ];
+
+  const videoAdOptions = [
+    { id: "video-6months", duration: "6 months", price: 180, discount: "" },
+    { id: "video-12months", duration: "12 months", price: 350, discount: "20% off" }
+  ];
+
+  
+
+
+  const sideBarPremiumImage = [
+    { id: "image-6months", duration: "6 months", price: 180, discount: "" },
+    { id: "image-12months", duration: "12 months", price: 288, discount: "20% off" }
+  ];
+
+  const sideBarPremiumVideo = [
+    { id: "video-6months", duration: "6 months", price: 200, discount: "" },
+    { id: "video-12months", duration: "12 months", price: 320, discount: "20% off" }
+  ];
+
+  const sideBarStandardImage = [
+    { id: "image-6months", duration: "6 months", price: 140, discount: "" },
+    { id: "image-12months", duration: "12 months", price: 224, discount: "20% off" }
+  ];
+
+  const sideBarStandardVideo = [
+    { id: "image-6months", duration: "6 months", price: 165, discount: "" },
+    { id: "image-12months", duration: "12 months", price: 264, discount: "20% off" }
+  ];
+
+  const adPlacementInContentImage= [
+    { id: "image-6months", duration: "6 months", price: 380, discount: "" },
+    { id: "image-12months", duration: "12 months", price: 608, discount: "20% off" }
+  ];
+
+
+  const adPlacementInContentVideo = [
+    { id: "video-6months", duration: "6 months", price: 400, discount: "" },
+    { id: "video-12months", duration: "12 months", price: 640, discount: "20% off" }
+  ];
+
+  const productShowCaseImage = [
+    { id: "image-6months", duration: "6 months", price: 670, discount: "" },
+    { id: "image-12months", duration: "12 months", price: 1072, discount: "20% off" }
+  ];
+
+  const productShowCaseVideo= [
+    { id: "video-6months", duration: "6 months", price: 690, discount: "" },
+    { id: "video-12months", duration: "12 months", price: 1104, discount: "20% off" }
+  ];
+
+  const premiumAdPlacementImage = [
+    { id: "image-6months", duration: "6 months", price: 600, discount: "" },
+    { id: "image-12months", duration: "12 months", price: 960, discount: "20% off" }
+  ];
+
+  const premiumAdPlacementVideo = [
+    { id: "video-6months", duration: "6 months", price: 700, discount: "" },
+    { id: "video-12months", duration: "12 months", price: 1120, discount: "20% off" }
+  ];
+
+  const productBrandStory= [
+    { id: "6months", duration: "6 months", price: 850, discount: "" },
+    { id: "12months", duration: "12 months", price: 1410, discount: "20% off" }
+  ];
+
+
+
+  
+
+
+
+  const adExamples = [
+    {
+      id: "banner-ad",
+      title: "Premium Banner Placement",
+      description: "Top-of-page placement with maximum visibility. Perfect for brand awareness campaigns.",
+      dimensions: "1200x200px",
+      impressions: "50,000+ monthly",
+      type: "banner"
+    },
+
+    {
+      id: "sidebar-ad-premium-image",
+      title: "Sidebar  Image Placement",
+      description: "Persistent visibility on all pages. Great for targeted promotions.",
+      dimensions: "300x600px",
+      impressions: "30,000+ monthly",
+      type: "sidebar"
+    },
+
+    {
+      id: "sidebar-ad-premium-video",
+      title: "Sidebar  Video Placement",
+      description: "Persistent visibility on all pages. Great for targeted promotions.",
+      dimensions: "300x600px",
+      impressions: "30,000+ monthly",
+      type: "sidebar"
+    },
+
+    {
+      id: "inContent-ad-image",
+      title: "In Content Image",
+      description: "Persistent visibility on all pages. Great for targeted promotions.",
+      dimensions: "Flexible",
+      impressions: "30,000+ monthly",
+      type: "inContent"
+    },
+
+    {
+      id: "inContent-ad-video",
+      title: "In Content Video Placement ",
+      description: "Persistent visibility on all pages. Great for targeted promotions.",
+      dimensions: "Flexible",
+      impressions: "30,000+ monthly",
+      type: "inContent"
+    },
+
+    {
+      id: "premium-ad-image",
+      title: "Premium Image Placement ",
+      description: "Persistent visibility on all pages. Great for targeted promotions.",
+      dimensions: "1200x200px",
+      impressions: "30,000+ monthly",
+      type: "premiumImage"
+    },
+
+
+    {
+      id: "premium-ad-video",
+      title: "Premium Video Placement",
+      description: "Persistent visibility on all pages. Great for targeted promotions.",
+      dimensions: "1200x200px",
+      impressions: "30,000+ monthly",
+      type: "premiumVideo"
+    },
+
+
+    {
+      id: "product-showcase-ad-image",
+      title: "Product Showcase Image Placement",
+      description: "Persistent visibility on all pages. Great for targeted promotions.",
+      dimensions: "800x400px",
+      impressions: "30,000+ monthly",
+      type: "iinContent"
+    },
+
+    {
+      id: "product-showcase-ad-video",
+      title: "Product Showcase Video Placement",
+      description: "Persistent visibility on all pages. Great for targeted promotions.",
+      dimensions: "800x400px",
+      impressions: "30,000+ monthly",
+      type: "iinContent"
+    },
+
+
+    {
+      id: "brand-story-ad",
+      title: "Brand Story",
+      description: "Persistent visibility on all pages. Great for targeted promotions.",
+      dimensions: "800x400px",
+      impressions: "30,000+ monthly",
+      type: "iinContent"
+    },
+
+
+
+
+
+    /*Current*/
+
+
+
+    {
+      id: "premiumhomepage-ad",
+      title: "Premium Homepage Placemen iiiut",
+      description: "Top-of-page placement with maximum visibility. Perfect for brand awareness campaigns.",
+      dimensions: "1200x200px",
+      impressions: "50,000+ monthly",
+      type: "banner"
+    },
+
+    {
+      id: "sidebar-ad",
+      title: "Sidebar Placement - Advertising iiiu",
+      description: "Persistent visibility on all pages. Great for targeted promotions.",
+      dimensions: "300x600px",
+      impressions: "30,000+ monthly",
+      type: "sidebar"
+    },
+    {
+      id: "content-ad",
+      title: "In-Content Promotion iiiu",
+      description: "Native-style ads within article content. Higher engagement rates.",
+      dimensions: "Flexible",
+      impressions: "Varies by content",
+      type: "content"
+    },
+    {
+      id: "brand-ad",
+      title: "Brand Story iiiu",
+      description: "Exclusive placement in our featured section. Limited availability.",
+      dimensions: "800x400px",
+      impressions: "25,000+ monthly",
+      type: "featured"
+    },
+
+    {
+      id: "productshowcase-ad",
+      title: "Product Showcase iiiu",
+      description: "Exclusive placement in our Product Showcase section. Limited availability.",
+      dimensions: "800x400px",
+      impressions: "25,000+ monthly",
+      type: "featured"
+    }
+
+
+    
+  ];
+
+  // Load PayPal script
+  useEffect(() => {
+    const loadPayPalScript = () => {
+      if (typeof window !== 'undefined' && window.paypal) {
+        setPaypalLoaded(true);
+        return;
+      }
+      
+      const timer = setTimeout(() => {
+        if (window.paypal) {
+          setPaypalLoaded(true);
+        }
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    };
+
+    loadPayPalScript();
+  }, []);
+
+  // Form submission handler
+  const onSubmit = async (data) => {
+    setIsProcessing(true);
+    try {
+      console.log("Form submitted:", data);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      toast.success(`Payment successful! Total: $${calculateTotal()}`);
+      resetForm();
+    } catch (error) {
+      setPaymentError("Payment processing failed. Please try again.");
+      console.error("Payment error:", error);
+      toast.error("Payment failed. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  // PayPal integration
+  const createOrder = (data, actions) => {
+    if (!selectedImageAd && !selectedVideoAd) {
+      setPaymentError("Please select at least one ad option");
+      return actions.reject();
+    }
+    
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: calculateTotal().toString(),
+            currency_code: "USD",
+            breakdown: {
+              item_total: {
+                value: calculateTotal().toString(),
+                currency_code: "USD"
+              }
+            }
+          },
+          items: getSelectedItems()
+        }
+      ],
+      application_context: {
+        shipping_preference: "NO_SHIPPING"
+      }
+    });
+  };
+
+  const onApprove = (data, actions) => {
+    return actions.order.capture().then((details) => {
+      toast.success(`Transaction completed by ${details.payer.name.given_name}`);
+      resetForm();
+    });
+  };
+
+  const onError = (err) => {
+    console.error("PayPal error:", err);
+    setPaymentError("Payment failed. Please try another method.");
+    toast.error("Payment failed. Please try another method.");
+  };
+
+  const onCancel = (data) => {
+    console.log("Payment cancelled:", data);
+    setPaymentError("Payment was cancelled");
+    toast.warning("Payment was cancelled");
+  };
+
+  // Helper functions
+  const calculateTotal = () => {
+    let total = 0;
+    const imageAd = imageAdOptions.find(opt => opt.duration === selectedImageAd);
+    const videoAd = videoAdOptions.find(opt => opt.duration === selectedVideoAd);
+    
+    if (imageAd) total += imageAd.price;
+    if (videoAd) total += videoAd.price;
+    
+    return total;
+  };
+
+  const getSelectedItems = () => {
+    const items = [];
+    if (selectedImageAd) {
+      const option = imageAdOptions.find(opt => opt.duration === selectedImageAd);
+      items.push({
+        name: `Image Ad (${option.duration})`,
+        unit_amount: {
+          value: option.price.toString(),
+          currency_code: "USD"
+        },
+        quantity: "1"
+      });
+    }
+    if (selectedVideoAd) {
+      const option = videoAdOptions.find(opt => opt.duration === selectedVideoAd);
+      items.push({
+        name: `Video Ad (${option.duration})`,
+        unit_amount: {
+          value: option.price.toString(),
+          currency_code: "USD"
+        },
+        quantity: "1"
+      });
+    }
+    return items;
+  };
+
+  const resetForm = () => {
+    setSelectedImageAd("");
+    setSelectedVideoAd("");
+    setPaymentError("");
+    reset();
+  };
+
+  const handleAdExampleClick = (adId) => {
+    setActiveAdExample(adId === activeAdExample ? null : adId);
+  };
+
+  return (
+    <div className="app-container">
+      <ToastContainer position="top-right" autoClose={3000} />
+      <nav className="navbar">
+        <div className="navbar-brand">
+          <h2 style={{ fontWeight: "bold", color: "green" }}><a href="/">SPYDER</a></h2>
+        </div>
+        <div className="navbar-auth">
+          <SignedOut>
+            <SignInButton mode="modal" />
+          </SignedOut>
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+        </div>
+         <div>
+           {/*<Link to="/newsletter" className="crumbtrail"><small>Newsletter | </small></Link> */}
+            <Link to="/advertising" className="crumbtrail"> <small>Advertising | </small></Link>
+            <Link to="/pricing" className="crumbtrail"> <small>Pricing</small></Link>
+        </div>
+      </nav>
+
+      <div className="advertising-header">
+        <h1>Pricing Plans</h1>
+        <p>
+          Promote your business on our platform to reach thousands of energy-conscious consumers.
+          The <strong>SPYDER</strong> Digital Twin Smart Energy Meter Reader helps users find the
+          best electricity meters at competitive prices.
+        </p>
+      </div>
+
+      <div className="advertising-columns">
+        <div className="form-section">
+          <form onSubmit={handleSubmit(onSubmit)} className="advertising-form">
+
+          <div className="form-group">
+              <h2><i className="icon-image"></i> Premium Banner Placement</h2>
+              <p className="section-description">
+                Static image advertisements displayed throughout our platform.
+                Perfect for product promotions and brand awareness.
+              </p>
+              <div className="options-grid">
+                {imageAdOptions.map((option) => (
+                  <div 
+                    className={`option-card ${selectedImageAd === option.duration ? 'selected' : ''}`}
+                    key={option.id}
+                    onClick={() => setSelectedImageAd(option.duration)}
+                  >
+                    <input
+                      type="radio"
+                      id={option.id}
+                      name="imageAd"
+                      checked={selectedImageAd === option.duration}
+                      onChange={() => {}}
+                      hidden
+                    />
+                    <label htmlFor={option.id}>
+                      <span className="duration">{option.duration}</span>
+                      {option.discount && <span className="discount-badge">{option.discount}</span>}
+                      <span className="price">${option.price}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+
+
+          <div className="form-group">
+              <h2><i className="icon-image"></i> Premium Homepage Placement</h2>
+              <p className="section-description">
+                Static image advertisements displayed throughout our platform.
+                Perfect for product promotions and brand awareness.
+              </p>
+              <div className="options-grid">
+                {imageAdOptions.map((option) => (
+                  <div 
+                    className={`option-card ${selectedImageAd === option.duration ? 'selected' : ''}`}
+                    key={option.id}
+                    onClick={() => setSelectedImageAd(option.duration)}
+                  >
+                    <input
+                      type="radio"
+                      id={option.id}
+                      name="imageAd"
+                      checked={selectedImageAd === option.duration}
+                      onChange={() => {}}
+                      hidden
+                    />
+                    <label htmlFor={option.id}>
+                      <span className="duration">{option.duration}</span>
+                      {option.discount && <span className="discount-badge">{option.discount}</span>}
+                      <span className="price">${option.price}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+
+            <div className="form-group">
+              <h2><i className="icon-image"></i> In-Content Image Promotion</h2>
+              <p className="section-description">
+                Static image advertisements displayed throughout our platform.
+                Perfect for product promotions and brand awareness.
+              </p>
+              <div className="options-grid">
+                {imageAdOptions.map((option) => (
+                  <div 
+                    className={`option-card ${selectedImageAd === option.duration ? 'selected' : ''}`}
+                    key={option.id}
+                    onClick={() => setSelectedImageAd(option.duration)}
+                  >
+                    <input
+                      type="radio"
+                      id={option.id}
+                      name="imageAd"
+                      checked={selectedImageAd === option.duration}
+                      onChange={() => {}}
+                      hidden
+                    />
+                    <label htmlFor={option.id}>
+                      <span className="duration">{option.duration}</span>
+                      {option.discount && <span className="discount-badge">{option.discount}</span>}
+                      <span className="price">${option.price}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="form-group">
+              <h2 className="video-ads"><i className="icon-video"></i> In-Content Video Promotion</h2>
+              <p className="section-description">
+                Dynamic video content in premium placements. Higher engagement
+                and conversion rates.
+              </p>
+              <div className="options-grid">
+                {videoAdOptions.map((option) => (
+                  <div 
+                    className={`option-card ${selectedVideoAd === option.duration ? 'selected' : ''}`}
+                    key={option.id}
+                    onClick={() => setSelectedVideoAd(option.duration)}
+                  >
+                    <input
+                      type="radio"
+                      id={option.id}
+                      name="videoAd"
+                      checked={selectedVideoAd === option.duration}
+                      onChange={() => {}}
+                      hidden
+                    />
+                    <label htmlFor={option.id}>
+                      <span className="duration">{option.duration}</span>
+                      {option.discount && <span className="discount-badge">{option.discount}</span>}
+                      <span className="price">${option.price}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="form-group">
+              <h2 className="video-ads"><i className="icon-video"></i> Side Bar Placement</h2>
+              <p className="section-description">
+                Dynamic video content in premium placements. Higher engagement
+                and conversion rates.
+              </p>
+              <div className="options-grid">
+                {videoAdOptions.map((option) => (
+                  <div 
+                    className={`option-card ${selectedVideoAd === option.duration ? 'selected' : ''}`}
+                    key={option.id}
+                    onClick={() => setSelectedVideoAd(option.duration)}
+                  >
+                    <input
+                      type="radio"
+                      id={option.id}
+                      name="videoAd"
+                      checked={selectedVideoAd === option.duration}
+                      onChange={() => {}}
+                      hidden
+                    />
+                    <label htmlFor={option.id}>
+                      <span className="duration">{option.duration}</span>
+                      {option.discount && <span className="discount-badge">{option.discount}</span>}
+                      <span className="price">${option.price}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+
+               <div className="form-group">
+              <h2 className="video-ads"><i className="icon-video"></i> Brand Story Placement</h2>
+              <p className="section-description">
+                Dynamic video content in premium placements. Higher engagement
+                and conversion rates.
+              </p>
+              <div className="options-grid">
+                {videoAdOptions.map((option) => (
+                  <div 
+                    className={`option-card ${selectedVideoAd === option.duration ? 'selected' : ''}`}
+                    key={option.id}
+                    onClick={() => setSelectedVideoAd(option.duration)}
+                  >
+                    <input
+                      type="radio"
+                      id={option.id}
+                      name="videoAd"
+                      checked={selectedVideoAd === option.duration}
+                      onChange={() => {}}
+                      hidden
+                    />
+                    <label htmlFor={option.id}>
+                      <span className="duration">{option.duration}</span>
+                      {option.discount && <span className="discount-badge">{option.discount}</span>}
+                      <span className="price">${option.price}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+
+            <div className="form-group">
+              <h2 className="video-ads"><i className="icon-video"></i> Product Showcase</h2>
+              <p className="section-description">
+                Dynamic video content in premium placements. Higher engagement
+                and conversion rates.
+              </p>
+              <div className="options-grid">
+                {videoAdOptions.map((option) => (
+                  <div 
+                    className={`option-card ${selectedVideoAd === option.duration ? 'selected' : ''}`}
+                    key={option.id}
+                    onClick={() => setSelectedVideoAd(option.duration)}
+                  >
+                    <input
+                      type="radio"
+                      id={option.id}
+                      name="videoAd"
+                      checked={selectedVideoAd === option.duration}
+                      onChange={() => {}}
+                      hidden
+                    />
+                    <label htmlFor={option.id}>
+                      <span className="duration">{option.duration}</span>
+                      {option.discount && <span className="discount-badge">{option.discount}</span>}
+                      <span className="price">${option.price}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+
+            <div className="payment-section">
+              <h2><i className="icon-payment"></i> Payment</h2>
+              
+              <SignedOut>
+                <div className="auth-prompt">
+                  <p>Please <SignInButton mode="modal" className="login-button">sign in</SignInButton> to complete your purchase.</p>
+                </div>
+              </SignedOut>
+
+              <SignedIn>
+                <div className="order-summary">
+                  <h3>Order Summary</h3>
+                  <div className="order-items">
+                    {selectedImageAd && (
+                      <div className="order-item">
+                        <span>Image Ad ({selectedImageAd})</span>
+                        <span>${imageAdOptions.find(opt => opt.duration === selectedImageAd).price}</span>
+                      </div>
+                    )}
+                    {selectedVideoAd && (
+                      <div className="order-item">
+                        <span>Video Ad ({selectedVideoAd})</span>
+                        <span>${videoAdOptions.find(opt => opt.duration === selectedVideoAd).price}</span>
+                      </div>
+                    )}
+                    <div className="order-total">
+                      <span>Total</span>
+                      <span>${calculateTotal()}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="paypal-container">
+                  <h4>Pay with PayPal</h4>
+                  <p className="paypal-description">Safe and secure payments</p>
+                  
+                  <PayPalScriptProvider 
+                    options={{ 
+                      "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test",
+                      "currency": "USD",
+                      "intent": "capture",
+                      "components": "buttons",
+                      "disable-funding": "credit,card"
+                    }}
+                    onError={() => setPaypalError(true)}
+                    onLoad={() => setPaypalLoaded(true)}
+                  >
+                    {paypalError ? (
+                      <div className="paypal-error">
+                        Failed to load PayPal. Please refresh the page or try another payment method.
+                      </div>
+                    ) : paypalLoaded ? (
+                      <PayPalButtons
+                        style={{ 
+                          layout: "vertical",
+                          color: "blue",
+                          shape: "rect",
+                          label: "paypal",
+                          height: 48,
+                          tagline: false
+                        }}
+                        createOrder={createOrder}
+                        onApprove={onApprove}
+                        onError={onError}
+                        onCancel={onCancel}
+                        disabled={!selectedImageAd && !selectedVideoAd}
+                        forceReRender={[selectedImageAd, selectedVideoAd]}
+                      />
+                    ) : (
+                      <div className="paypal-loading">
+                        Loading PayPal...
+                      </div>
+                    )}
+                  </PayPalScriptProvider>
+                  
+                  <div className="payment-divider">
+                    <span>OR</span>
+                  </div>
+                </div>
+
+                <div className="credit-card-section">
+                  <h4>Pay with Credit/Debit Card</h4>
+                  <div className="form-control">
+                    <label htmlFor="cardNumber">Card Number &nbsp;</label>
+                    <input
+                      type="text"
+                      id="cardNumber"
+                      {...register("cardNumber", { 
+                        required: "Card number is required",
+                        pattern: {
+                          value: /^[0-9]{16}$/,
+                          message: "Invalid card number"
+                        }
+                      })}
+                      placeholder="1234 5678 9012 3456"
+                    />
+                    {errors.cardNumber && <span className="error">{errors.cardNumber.message}</span>}
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-control">
+                      <label htmlFor="expiry">Expiry Date &nbsp;</label>
+                      <input
+                        type="text"
+                        id="expiry"
+                        {...register("expiry", { 
+                          required: "Expiry date is required",
+                          pattern: {
+                            value: /^(0[1-9]|1[0-2])\/?([0-9]{2})$/,
+                            message: "MM/YY format required"
+                          }
+                        })}
+                        placeholder="MM/YY"
+                      />
+                      {errors.expiry && <span className="error">{errors.expiry.message}</span>}
+                    </div>
+
+                    <div className="form-control">
+                      <label htmlFor="cvc">CVC &nbsp;</label>
+                      <input
+                        type="text"
+                        id="cvc"
+                        {...register("cvc", { 
+                          required: "CVC is required",
+                          pattern: {
+                            value: /^[0-9]{3,4}$/,
+                            message: "Invalid CVC"
+                          }
+                        })}
+                        placeholder="123"
+                      />
+                      {errors.cvc && <span className="error">{errors.cvc.message}</span>}
+                    </div>
+                  </div>
+
+                  <div className="form-control">
+                    <label htmlFor="name">Name on Card &nbsp;</label>
+                    <input
+                      type="text"
+                      id="name"
+                      {...register("name", { 
+                        required: "Name is required",
+                        minLength: {
+                          value: 2,
+                          message: "Name must be at least 2 characters"
+                        }
+                      })}
+                      placeholder="John Smith"
+                    />
+                    {errors.name && <span className="error">{errors.name.message}</span>}
+                  </div>
+                </div>
+
+                <div className="submit-section">
+                  <button
+                    type="submit"
+                    className="payment-button"
+                    disabled={isProcessing || (!selectedImageAd && !selectedVideoAd)}
+                  >
+                    {isProcessing ? (
+                      <>
+                        <span className="spinner"></span> Processing...
+                      </>
+                    ) : (
+                      "Complete Payment"
+                    )}
+                  </button>
+                  {paymentError && (
+                    <div className="payment-error">
+                      <i className="icon-error"></i> {paymentError}
+                    </div>
+                  )}
+                </div>
+              </SignedIn>
+            </div>
+
+            </div>
+          </form>
+        </div>
+
+        <div className="ads-column">
+          <h2 className="examples-title">Advertising Placement Examples</h2>
+          <p className="examples-description">
+            See how your ads could appear on our platform. Click on each example to view details.
+          </p>
+
+          <div className="ad-examples-grid">
+            {adExamples.map((ad) => (
+              <div 
+                className={`ad-example-card ${ad.type} ${activeAdExample === ad.id ? 'expanded' : ''}`}
+                key={ad.id}
+                onClick={() => handleAdExampleClick(ad.id)}
+              >
+                <div className="ad-example-header">
+                  <h3>{ad.title}</h3>
+                  <i className={`icon-${ad.type}`}></i>
+                </div>
+                <div className="ad-example-preview">
+                  {ad.title} Preview Area
+                </div>
+                <div className="ad-example-details">
+                  <p>{ad.description}</p>
+                  <div className="ad-specs">
+                    <div className="spec">
+                      <span className="spec-label">Dimensions:</span>
+                      <span className="spec-value">{ad.dimensions}</span>
+                    </div>
+                    <div className="spec">
+                      <span className="spec-label">Impressions:</span>
+                      <span className="spec-value">{ad.impressions}</span>
+                    </div>
+                  </div>
+                  {activeAdExample === ad.id && (
+                    <div className="ad-benefits">
+                      <h4>Benefits:</h4>
+                      <ul>
+                        <li>Premium visibility on all devices</li>
+                        <li>Detailed performance analytics</li>
+                        <li>Dedicated account manager</li>
+                        {ad.type === 'featured' && <li>Exclusive placement</li>}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="advertising-info">
+            <h3>Why Advertise With Us?</h3>
+            <div className="info-cards">
+              <div className="info-card">
+                <i className="icon-audience"></i>
+                <h4>Targeted Audience</h4>
+                <p>Reach energy-conscious consumers actively looking for solutions</p>
+              </div>
+              <div className="info-card">
+                <i className="icon-analytics"></i>
+                <h4>Detailed Analytics</h4>
+                <p>Comprehensive reporting on impressions, clicks, and conversions</p>
+              </div>
+              <div className="info-card">
+                <i className="icon-support"></i>
+                <h4>Dedicated Support</h4>
+                <p>Our team will help optimize your campaigns for best results</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
