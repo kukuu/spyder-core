@@ -10,9 +10,9 @@ SPYDER is a Net Zero initiative Price comparison platform. it is  designed to he
 
 Hosted on EnergyTariffsCheck.com - https://www.energytariffscheck.com/ , **SPYDER** is a digital representation of a physical energy meter reader utilising real-time energy data, AI-driven analytics, and user-friendly tools to compare tariffs, track consumption,  simulate scenarios, predict outcomes, enable forecasting, facilitate predictive maintenance, and recommend cost-effective renewable energy options. 
   
-We have integrated dynamic carbon footprint tracking, personalised energy-saving strategies, and compliance frameworks into a scalable Next.js, TypeScript and Python platform - helping users align sustainability goals with practical, measurable actions.    
+SPYDER integrates dynamic carbon footprint tracking, personalised energy-saving strategies, and compliance frameworks into a scalable Next.js, TypeScript and Python platform - helping users align sustainability goals with practical, measurable actions.    
 
-_How it works_:
+**_How it works_:**
 
 This  Digital Twin Energy Meter Reader is a dynamic, virtual representation of a physical Energy Meter Reader. It mirrors the real-world entity by continuously collecting data from sensors, real-time data streams, data lakes, IoT devices, and other sources. The data is then processed and analyzed to create a digital replica that accurately simulates and reflects the behavior, status, and condition of its physical counterpart. By leveraging advanced technologies such as artificial intelligence, machine learning, and predictive analytics, digital twins can simulate various scenarios and predict future outcomes. This enables stakeholders to monitor performance, diagnose issues, optimize processes, and make data-driven decisions in real-time.
 
