@@ -41,6 +41,14 @@ Nut Cracker aims to integrate AI, LLM, ML, RAG  and Agentic workflows  to optimi
 
 ✅ Simulation Scenarios: "What if meter load increases by 20%?" → LLM runs digital twin simulations.
 
+## Repository
+
+- Frontend (core minimum): https://github.com/kukuu/spyder-core/tree/main/frontend
+
+- Backend (core - minimum): 
+
+- Main (**PRIVATE**) - https://github.com/kukuu/digital-twin-v2 (Full Lifecycle with CI/CD, AI, ML, LLM) | https://www.energytariffscheck.com/
+
 
 ## Technologies and Practices
   
