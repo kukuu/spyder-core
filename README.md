@@ -2,7 +2,9 @@
 
 https://www.energytariffscheck.com/ 
 
-SPYDER is an AI-driven platform for the energy sector. It was designed to ingest, process, and make sense of complex energy tariff data to provide actionable insights - a similar challenge to making sense of contract and generation data for policy compliance and reporting.   
+SPYDER is an AI-driven platform for the energy sector. It was designed to ingest, process, and make sense of complex energy tariff data to provide actionable insights - a similar challenge to making sense of contract and generation data for policy compliance and reporting. 
+
+This project reflects my passion for using technology as a dual force for environmental and economic impact - turning complex energy decisions into clear, actionable steps for a sustainable future. It follows my work on the OFGEM MHHR initiative. The MHHR is a  transformative energy sector initiative modernising the UK’s electricity settlement system to half-hourly intervals, enabling accurate billing, grid flexibility, and smarter energy use. It paves the way for renewable integration and cost savings for consumers. 
 
 A Net Zero initiative Price comparison platform. it is  designed to helps you find the best electricity tariff at the most competitive price. Compare different tariffs, check prices and choose the right option to save on energy bills. The Reader also serves as a forecasting system, a settlement tool and a Net Zero initiative - empowering businesses and consumers with actionable insights for reducing carbon emissions and adopting sustainable energy solutions.  
 
@@ -12,8 +14,6 @@ We have integrated dynamic carbon footprint tracking, personalised energy-saving
 
 This  Digital Twin Energy Meter Reader is a dynamic, virtual representation of a physical Energy Meter Reader. It mirrors the real-world entity by continuously collecting data from sensors, real-time data streams, data lakes, IoT devices, and other sources. The data is then processed and analyzed to create a digital replica that accurately reflects the behavior, status, and condition of its physical counterpart. By leveraging advanced technologies such as artificial intelligence, machine learning, and predictive analytics, digital twins can simulate various scenarios and predict future outcomes. This enables stakeholders to monitor performance, diagnose issues, optimize processes, and make data-driven decisions in real-time.
 
-
-This project reflects my passion for using technology as a dual force for environmental and economic impact - turning complex energy decisions into clear, actionable steps for a sustainable future. It follows my work on the OFGEM MHHR initiative. The MHHR is a  transformative energy sector initiative modernising the UK’s electricity settlement system to half-hourly intervals, enabling accurate billing, grid flexibility, and smarter energy use. It paves the way for renewable integration and cost savings for consumers. 
 
 
 
