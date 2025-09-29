@@ -23,12 +23,11 @@ This  Digital Twin Energy Meter Reader is a dynamic, virtual representation of a
 
 https://www.energytariffscheck.com/newsletter
 
-The primary objective of **Nut Cracker** (Digital Twin V4) is to leverage Artificial Intelligence (AI) and Machine Learning (ML), to streamline the transaction process involving data generation, processing,and transformation - ETL. This process focuses on real-time data sourced from distributed and disparate networks and systems. It's ML lifecycle covers data preparation and model training to deployment and monitoring.
+The primary objective of **Nut Cracker** (Digital Twin V4) is to leverage Artificial Intelligence (AI) and Machine Learning (ML), to streamline the transaction process involving data generation, processing,and transformation - ETL. This process focuses on real-time data sourced from IoT and IIoT distributed and disparate networks and systems. It's ML lifecycle covers data preparation and model training to deployment and monitoring.
 
 
-Nut Cracker aims to integrate AI and ML  technologies to optimize data workflows, deliver predictive insights, and provide robust visualization tools for performance monitoring and future planning. As a high-volume throughput system, it exemplifies real-time asynchronous data processing capability ensuring scalability, reliability, flexibility, observability, security and addresses challenges like schema evolution and fault tolerance.
+Nut Cracker aims to integrate AI, LLM, ML, RAG  and Agentic workflows  to optimize data pipelines, deliver predictive insights, and provide robust visualization tools for performance monitoring and future planning. As a high-volume throughput system, it exemplifies real-time asynchronous data processing capability ensuring scalability, reliability, flexibility, observability, security and addresses challenges like schema evolution and fault tolerance.
 
-NodeJS, JavaScript,  Python, Machine Learning, Artificial Inrtelligence, Event Driven Concurrency, RDBMS / NoSQL technologies (e.g. MySQL, Redis, DynamoDB), and cloud technologies are core in this innovation.
 
 ## Key Features LLM Integration
 
